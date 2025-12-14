@@ -38,14 +38,11 @@ immediateError('Error!', MyCustomError) // throws a MyCustomError with the messa
 
 ## Why?
 
-This module is great because it uses the best practices in JavaScript such as using dependencies like [`throw-error`](https://npmjs.com/package/throw-error) and [`yanoop`](https://npmjs.com/package/yanoop) to throw errors and using [`es-errors`](https://npmjs.com/package/es-errors) instead of using the error classes natively.
+This module is great because it uses the best practices in JavaScript such as using dependencies like [`yanoop`](https://npmjs.com/package/yanoop) to throw errors and using [`es-errors`](https://npmjs.com/package/es-errors) instead of using the error classes natively.
+
+## why?
+why not
 
 ## Show your support
 
 [Follow me on GitHub](https://github.com/tj-commits) and star my repositories.
-
-## is this a joke?
-
-Of course not!
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-(Yes, it is.)
