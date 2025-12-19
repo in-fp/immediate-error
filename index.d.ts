@@ -9,4 +9,11 @@ export enum ErrorType {
   NativeAssertionError = 7
 }
 
-export function immediateError(message?: string, errorType?: ErrorType | Function): void
+export type CustomError = {
+  new (message: string): never
+}
+
+export function immediateError(
+  message: string, 
+  errorType?: ErrorType | CustomError
+): never

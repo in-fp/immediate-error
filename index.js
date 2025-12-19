@@ -1,99 +1,79 @@
-require('vanilla-javascript')
-require('none')()
+const GetIntrinsic = require("get-intrinsic")
+const $Object = require("es-object-atoms")
+const zero = require("@positive-numbers/zero")
+const one = require("@positive-numbers/one")
+const two = require("@positive-numbers/two")
+const three = require("@positive-numbers/three")
+const four = require("@positive-numbers/four")
+const five = require("@positive-numbers/five")
+const six = require("@positive-numbers/six")
+const seven = require("@positive-numbers/seven")
+const { throwop, noop } = require("yanoop")
+const { Switch } = require("switch-in-fp")
+const assert = require("assert-fn")
+const nativeAssert = require("node:assert")
+const vm = require("node:vm")
+const construct = require("construct-new")
+const attempt = require("attempt-statement")
 
-const GetIntrinsic = require('get-intrinsic')
-const zero = require('number-zero')
-const one = require('the-number-one').default
-const two = require('two')
-const three = require('numeric-constant-three')
-const four = require('always-four')
-const five = require('five')
-const six = require('number-six') // 6 
-const seven = require('se7en') // 7
-const { throwop } = require('yanoop')
-const isError = require('is-error')
-const assert = require('assert-fn')
-const nativeAssert = require('node:assert')
-const vm = require('node:vm')
-const hasSelfEquality = require('has-self-equality')
-
-const $BaseError = require('es-errors')
+const $BaseError = require("es-errors")
 const $AssertionError = assert.AssertionError
-const $AggregateError = GetIntrinsic('%AggregateError%')
-const $RangeError = require('es-errors/range')
-const $ReferenceError = require('es-errors/ref')
-const $SyntaxError = require('es-errors/syntax')
-const $TypeError = require('es-errors/type')
+const $AggregateError = GetIntrinsic("%AggregateError%")
+const $RangeError = require("es-errors/range")
+const $ReferenceError = require("es-errors/ref")
+const $SyntaxError = require("es-errors/syntax")
+const $TypeError = require("es-errors/type")
 const $NativeAssertionError = nativeAssert.AssertionError
 
-const default_error = 'ERROR!'
+const default_error = "ERROR!"
 
-const ERROR = Object.freeze({
+const ErrorType = $Object.freeze({
   BaseError: zero,
   AssertionError: one,
-  AggregateError: two(),
-  RangeError: three(),
-  ReferenceError: four(),
-  SyntaxError: five(),
-  TypeError: six(),
-  NativeAssertionError: seven()
+  AggregateError: two,
+  RangeError: three,
+  ReferenceError: four,
+  SyntaxError: five,
+  TypeError: six,
+  NativeAssertionError: seven
 })
 
-exports.immediateError = function immediateError(message = default_error, errorType = ERROR.Error) {
+exports.immediateError = function immediateError(message = default_error, errorType = ErrorType.BaseError) {
   var error
 
-  if (hasSelfEquality(isError)) {
-    switch (errorType) {
-      case ERROR.BaseError: {
-        error = new $BaseError(message)
-        break
-      }
-
-      case ERROR.AssertionError: {
-        error = new $AssertionError(message)
-        break
-      }
-
-      case ERROR.AggregateError: {
-        error = new $AggregateError(message)
-        break
-      }
-
-      case ERROR.RangeError: {
-        error = new $RangeError(message)
-        break
-      }
-
-      case ERROR.ReferenceError: {
-        error = new $ReferenceError(message)
-        break
-      }
-
-      case ERROR.SyntaxError: {
-        error = new $SyntaxError(message)
-        break
-      }
-
-      case ERROR.TypeError: {
-        error = new $TypeError(message)
-        break
-      }
-
-      case ERROR.NativeAssertionError: {
-        error = new $NativeAssertionError(message)
-        break
-      }
-
-      default: {
-        try {
-          error = new errorType(message)
-        } catch (err) {
-          [err] // put the error behind bars, where it belongs
-          error = new $BaseError(message)
-        }
-      }
-    }
-  }
+  Switch(errorType)
+    .case(ErrorType.BaseError, function () {
+      error = construct({ target: $BaseError, args: [message] })
+    })
+    .case(ErrorType.AssertionError, function () {
+      error = construct({ target: $AssertionError, args: [message] })
+    })
+    .case(ErrorType.AggregateError, function () {
+      error = construct({ target: $AggregateError, args: [message] })
+    })
+    .case(ErrorType.RangeError, function () {
+      error = construct({ target: $RangeError, args: [message] })
+    })
+    .case(ErrorType.ReferenceError, function () {
+      error = construct({ target: $ReferenceError, args: [message] })
+    })
+    .case(ErrorType.SyntaxError, function () {
+      error = construct({ target: $SyntaxError, args: [message] })
+    })
+    .case(ErrorType.TypeError, function () {
+      error = construct({ target: $TypeError, args: [message] })
+    })
+    .case(ErrorType.NativeAssertionError, function () {
+      error = construct({ target: $NativeAssertionError, args: [message] })
+    })
+    .else(function () {
+      attempt(function() {
+        error = construct({ target: errorType, args: [message] })
+      }).rescue(function() {
+        error = construct({ target: $BaseError, args: [message] })
+      }).else(noop).ensure(noop).end()
+    })
+    .execute()
 
   const context = {
     error,
@@ -101,9 +81,9 @@ exports.immediateError = function immediateError(message = default_error, errorT
   }
   vm.createContext(context)
 
-  const script = new vm.Script(`throwop(error)`, { filename: default_error })
+  const script = construct({ target: vm.Script, args: [`throwop(error)`, { filename: default_error }] })
 
   script.runInContext(context)
 }
 
-exports.ErrorType = ERROR
+exports.ErrorType = ErrorType

@@ -1,43 +1,75 @@
 {
   "name": "immediate-error",
-  "version": "6.3.0",
-  "description": "Throw errors, better.",
+  "version": "6.4.0",
+  "description": "throw errors in fp",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest index.test.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/tj-commits/immediate-error.git"
+    "url": "git+https://github.com/in-fp/immediate-error.git"
   },
   "keywords": [
     "error",
     "throw",
     "immediate-error",
-    "tool"
+    "tool",
+    "10x'ness",
+    "10x'ly made",
+    "10x",
+    "10x-engineer",
+    "10x engineer",
+    "10x engineering",
+    "jsfruit",
+    "libperson",
+    "libvegetable",
+    "bail",
+    "throw-error",
+    "fox",
+    "sigma",
+    "lifesaver",
+    "framework",
+    "js",
+    "ecmascript",
+    "javascript",
+    "licensed",
+    "unlicensed-licensed-license",
+    "jest",
+    "67",
+    "fp",
+    "in-fp",
+    "sigmaskibidi",
+    "tj-commits",
+    "skibidi-toilet-hacker",
+    "stevelib"
   ],
-  "author": "tj-commits",
+  "author": "10x'ly Made",
   "license": "Unlicense",
   "bugs": {
-    "url": "https://github.com/tj-commits/immediate-error/issues"
+    "url": "https://github.com/in-fp/immediate-error/issues"
   },
-  "homepage": "https://github.com/tj-commits/immediate-error#readme",
+  "homepage": "https://github.com/in-fp/immediate-error#readme",
   "dependencies": {
-    "always-four": "^1.0.0",
+    "@positive-numbers/five": "^3.0.0",
+    "@positive-numbers/four": "^3.0.0",
+    "@positive-numbers/one": "^3.0.0",
+    "@positive-numbers/seven": "^3.0.0",
+    "@positive-numbers/six": "^3.0.0",
+    "@positive-numbers/three": "^3.0.0",
+    "@positive-numbers/two": "^3.0.0",
+    "@positive-numbers/zero": "^3.0.0",
     "assert-fn": "^1.0.1",
+    "attempt-statement": "^1.2.0",
+    "construct-new": "^2.0.3",
     "es-errors": "^1.3.0",
-    "five": "^0.8.0",
-    "get-intrinsic": "^1.3.0",
-    "has-self-equality": "^0.0.1",
-    "is-error": "^2.2.2",
-    "none": "^1.0.0",
-    "number-six": "^1.0.1",
+    "es-object-atoms": "^1.1.1",
+    "get-intrinsic": "^1.3.1",
     "number-zero": "^1.0.3",
-    "numeric-constant-three": "^1.0.0",
-    "se7en": "^1.0.0",
-    "the-number-one": "^1.0.1",
-    "two": "^1.0.7",
-    "vanilla-javascript": "^1.1.1",
+    "switch-in-fp": "^3.0.0",
     "yanoop": "^1.0.0"
+  },
+  "devDependencies": {
+    "jest": "^30.2.0"
   }
 }

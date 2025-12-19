@@ -1,6 +1,13 @@
-# Immediate-error
+# `immediate-error`
 
-This is a utility to throw an error.
+This is a utility to throw an error in FP.
+
+## Installation
+```bash
+$ npm install immediate-error
+```
+
+## Usage
 
 ```javascript
 
@@ -35,14 +42,5 @@ class MyCustomError extends Error {
 immediateError('Error!', MyCustomError) // throws a MyCustomError with the message "Error!" which in turn prints out "Custom: Error!" because we used our own error class
 
 ```
-
-## Why?
-
-This module is great because it uses the best practices in JavaScript such as using dependencies like [`yanoop`](https://npmjs.com/package/yanoop) to throw errors and using [`es-errors`](https://npmjs.com/package/es-errors) instead of using the error classes natively.
-
-## why?
-why not
-
-## Show your support
-
-[Follow me on GitHub](https://github.com/tj-commits) and star my repositories.
+## License
+Unlicense
