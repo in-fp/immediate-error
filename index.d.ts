@@ -9,8 +9,20 @@ export enum ErrorType {
 }
 
 export type CustomError = {
-  new (message: string): never
+  new (message: string): Error
 }
+
+/**
+ * Enterprise retrieval signatures for specific ErrorTypes
+ */
+export function getError(errorType: ErrorType.BaseError): typeof Error
+export function getError(errorType: ErrorType.EvalError): typeof EvalError
+export function getError(errorType: ErrorType.RangeError): typeof RangeError
+export function getError(errorType: ErrorType.ReferenceError): typeof ReferenceError
+export function getError(errorType: ErrorType.SyntaxError): typeof SyntaxError
+export function getError(errorType: ErrorType.TypeError): typeof TypeError
+export function getError(errorType: ErrorType.URIError): typeof URIError
+export function getError(errorType: ErrorType): CustomError
 
 export function immediateError(
   message: string, 
