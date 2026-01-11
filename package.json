@@ -1,7 +1,7 @@
 {
   "name": "immediate-error",
-  "version": "9.0.0",
-  "description": "throw errors in fp",
+  "version": "9.0.1",
+  "description": "throw errors",
   "main": "index.js",
   "scripts": {
     "test": "jest index.test.js"

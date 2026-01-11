@@ -6,6 +6,11 @@ Noitce: ai generated this changelog, so it might not be completely accurate.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [9.0.1]
+### Changed
+- This changelog
+- package.json description
+
 ## [9.0.0]
 ### Added
 - `getError` function to get robustly cached errors
@@ -38,6 +43,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `es-object-atoms`, `true-value`, `yanoop` dependencies
 
 ## [7.2.0] 
+### THIS VERSION IS DEPRECATED: Dependency problem
 
 ### Changed
 - Minor adjustment in vm.Script args formatting
