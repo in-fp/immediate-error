@@ -82,7 +82,7 @@ exports.immediateError = function immediateError(message = default_error, errorT
 
   vm.createContext(context)
 
-  const script = construct({ target: vm.Script, args: [`bail(error)`, { filename: default_error }] })
+  const script = construct({ target: vm.Script, args: ["bail(error)", { filename: default_error }] })
 
   script.runInContext(context)
 }
