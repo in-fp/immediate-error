@@ -36,5 +36,8 @@ class MyCustomError extends Error {
 immediateError('Error!', MyCustomError) // throws a MyCustomError with the message "Error!" which in turn prints out "Custom: Error!" because we used our own error class
 
 ```
+### Changelog
+See Changelog in [Changelog.md](https://github.com/enterprise-npm-ai/immediate-error/blob/main/CHANGELOG.md)
+
 ## License
 Unlicense

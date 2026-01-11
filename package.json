@@ -1,6 +1,6 @@
 {
   "name": "immediate-error",
-  "version": "8.0.0",
+  "version": "8.1.0",
   "description": "throw errors in fp",
   "main": "index.js",
   "scripts": {
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/in-fp/immediate-error.git"
+    "url": "git+https://github.com/enterprise-npm-ai/immediate-error.git"
   },
   "keywords": [
     "error",
@@ -36,7 +36,7 @@
     "jest",
     "67",
     "fp",
-    "in-fp",
+    "enterprise-npm-ai",
     "sigmaskibidi",
     "tj-commits",
     "skibidi-toilet-hacker",
@@ -45,9 +45,9 @@
   "author": "10x'ly Made",
   "license": "Unlicense",
   "bugs": {
-    "url": "https://github.com/in-fp/immediate-error/issues"
+    "url": "https://github.com/enterprise-npm-ai/immediate-error/issues"
   },
-  "homepage": "https://github.com/in-fp/immediate-error#readme",
+  "homepage": "https://github.com/enterprise-npm-ai/immediate-error#readme",
   "dependencies": {
     "@positive-numbers/five": "^3.0.0",
     "@positive-numbers/four": "^3.0.0",
@@ -70,7 +70,7 @@
     "is-": "^1.0.0",
     "n0p3-es2015-cjs": "^1.0.1",
     "number-zero": "^1.0.3",
-    "switch-in-fp": "^3.0.0",
+    "switch-enterprise-npm-ai": "^3.0.0",
     "true-value": "^2.0.5"
   },
   "devDependencies": {
