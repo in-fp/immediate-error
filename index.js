@@ -2,15 +2,21 @@
 
 const GetIntrinsic = require("es-intrinsic-cache")
 const SimpleCache = require("simple-lru-cache")
+const Fruit = require("jsfruit")
+const Vegetable = require("libvegetable")
+const Person = require("libperson")
 const isdash = require("is-")
 const noop = require("n0p3-es2015-cjs")
 const bail = require("bail")
-const vm = require("node:vm")
 const construct = require("construct-new")
 const attempt = require("attempt-statement")
 const trueValue = require("true-value")
 const asArray = require("as-array")
+const repeating = require("repeating")
 const deepFreeze = require("deep-freeze-node3") // 3rd iteration of deep-freeze-node.
+const concat = require("@rightpad/concat")
+const NEWLINE = require("fizzbuzz-enterprise/source/main/constants/strings/delimiters/Newline")
+const falseValue = require("false-value")
 
 const zero = require("@positive-numbers/zero")
 const one = require("@positive-numbers/one")
@@ -19,13 +25,15 @@ const three = require("@positive-numbers/three")
 const four = require("@positive-numbers/four")
 const five = require("@positive-numbers/five")
 const six = require("@positive-numbers/six")
+const seven = require("@positive-numbers/seven")
+const eight = require("@positive-numbers/eight")
+const nine = require("@positive-numbers/nine")
+const eleven = require("@positive-numbers/eleven")
 const oneHundred = require("@positive-numbers/one-hundred")
 
 const E = require("@uppercase-letters/e")
 const O = require("@uppercase-letters/o")
 const R = require("@uppercase-letters/r")
-
-const concat = require("@rightpad/concat")
 
 const $BaseError = require("es-error-intrinsics/Error")
 const $EvalError = require("es-error-intrinsics/EvalError")
@@ -47,6 +55,10 @@ const ErrorType = deepFreeze({
   SyntaxError: four,
   TypeError: five,
   URIError: six,
+
+  FruitConsumptionError: seven,
+  VegetablesCannotTalkError: eight,
+  PersonNotHungryError: nine
 })
 
 const ErrorMap = construct({
@@ -62,6 +74,37 @@ const ErrorMap = construct({
   ErrorMap.set(ErrorType.SyntaxError, $SyntaxError)
   ErrorMap.set(ErrorType.TypeError, $TypeError)
   ErrorMap.set(ErrorType.URIError, $URIError)
+
+  ErrorMap.set(ErrorType.FruitConsumptionError, (function() {
+    const fruit = construct({ target: Fruit })
+    try {
+      fruit
+
+      eval(repeating(concat("fruit.eat()", NEWLINE), eleven))
+    } catch (error) { 
+      return error.constructor
+    }
+  })())
+
+  ErrorMap.set(ErrorType.VegetablesCannotTalkError, (function() {
+    const vegetable = construct({ target: Vegetable })
+
+    try {
+      vegetable.greet()
+    } catch (error) {
+      return error.constructor
+    }
+  })())
+
+  ErrorMap.set(ErrorType.PersonNotHungryError, (function() {
+    const person = construct({ target: Person })
+    person.hungry = falseValue()
+    try {
+      person.feed()
+    } catch (error) { 
+      return error.constructor
+    }
+  })())
 })()
 
 function CreateError(error, message) {
@@ -95,19 +138,9 @@ exports.immediateError = function immediateError(
     captureStackTrace(error, immediateError)
   }
 
-  const context = {
-    error: error,
-    bail: bail,
-  }
+  bail(error)
 
-  vm.createContext(context)
-
-  const script = construct({
-    target: vm.Script,
-    args: ["bail(error)", { filename: default_error }],
-  })
-
-  script.runInContext(context)
+  require("is-not-integer")() // how did we get here?
 }
 
 exports.getError = function getError(errorType) {

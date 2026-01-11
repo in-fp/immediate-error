@@ -30,6 +30,14 @@ immediateError("Syntax error", ErrorType.SyntaxError) // throws a SyntaxError
 
 immediateError("URI Error", ErrorType.URIError) // throws a URIError
 
+// Domain-specific Enterprise Errors:
+
+immediateError("fruit consumption error", ErrorType.FruitConsumptionError) // throws FruitConsumptionError
+
+immediateError("vegetables cannot talk error", ErrorType.VegetablesCannotTalkError) // throws a VegetablesCannotTalkError
+
+immediateError("person not hungry error", ErrorType.PersonNotHungryError) // throws a PersonNotHungryError
+
 class MyCustomError extends Error {
   constructor (message) {
     super("Custom: " + message)
@@ -47,6 +55,17 @@ const { getError, ErrorType } = require("immediate-error")
 const TypeErrorConstructor = getError(ErrorType.TypeError)
 
 console.log(TypeErrorConstructor === TypeError) // true
+
+const VegetablesCannotTalkError = getError(ErrorType.VegetablesCannotTalkError)
+
+try {
+  const Vegetable = require("libvegetable")
+  const vegetable = new Vegetable()
+
+  vegetable.greet()
+} catch (error) {
+  console.log(error.constructor === VegetablesCannotTalkError) // true
+}
 ```
 
 ### Changelog
