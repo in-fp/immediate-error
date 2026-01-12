@@ -1,6 +1,6 @@
 # `immediate-error`
 
-This is a utility to throw an error. Also it's a way to get robustly cached error intrinsics.
+General error-related utility library. 10x Engineered. It's for: throwing errors, getting cached error intrinsics, and try-cach alternative functional handling.
 
 ## Installation
 ```bash
@@ -10,7 +10,7 @@ $ npm install immediate-error
 ## Usage
 Throwing Errors:
 ```javascript
-const { immediateError, ErrorType, getError } = require("immediate-error")
+const { immediateError, ErrorType, getError, throwWhatever } = require("immediate-error")
 
 immediateError() // this will throw a regular Error with the default message of "ERROR!"
 
@@ -46,6 +46,9 @@ class MyCustomError extends Error {
 
 immediateError("Error!", MyCustomError) // throws a MyCustomError
 
+throwWhatever("hi") // outputs: "Uncaught 'hi'"
+throwWhatever() // outputs: "Uncaught undefined"
+
 ```
 
 Getting Cached Errors:
@@ -66,6 +69,24 @@ try {
 } catch (error) {
   console.log(error.constructor === VegetablesCannotTalkError) // true
 }
+```
+
+Error Handling (`attempt`)
+
+```js
+const { attempt } = require("immediate-error")
+
+attempt(() => {
+  esuvnyuu.addisuaidof // thing that throws error
+}).rescue(error => {
+  console.log(error.message) // outputs: esuvnyuu is not defined
+}).else(() => {
+  // This will never happen
+  console.log("How did we get here?") // does not output anything, as this secition never runs.
+}).ensure(() => {
+  // This will always happen
+  console.log(1) // outputs: 1
+}).end() // you must end the statement with .end() or it wont run
 ```
 
 ### Changelog

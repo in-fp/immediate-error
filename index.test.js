@@ -61,3 +61,120 @@ describe("immediateError utility", () => {
     }
   })
 })
+
+const { attempt } = require("./index")
+
+describe("attempt utility", () => {
+  // Pattern support
+  test("works as a standard function", () => {
+    let called = false
+    attempt(() => {
+      called = true
+    }).end()
+    expect(called).toBe(true)
+  })
+
+  test("works as a constructor returning an instance", () => {
+    const instance = new attempt(() => {})
+    expect(instance).toBeDefined()
+    expect(typeof instance.rescue).toBe("function")
+  })
+
+  // Logic Flow
+  test("triggers rescue when the handler fails", () => {
+    let errorCaught = false
+    attempt(() => {
+      throw new Error("fail")
+    })
+      .rescue((e) => {
+        errorCaught = true
+        expect(e.message).toBe("fail")
+      })
+      .end()
+    expect(errorCaught).toBe(true)
+  })
+
+  test("triggers else only when the handler succeeds", () => {
+    let elseCalled = false
+    attempt(() => {
+      return "success"
+    })
+      .else(() => {
+        elseCalled = true
+      })
+      .end()
+    expect(elseCalled).toBe(true)
+  })
+
+  test("triggers ensure regardless of success or failure", () => {
+    let counter = 0
+    
+    // Success case
+    attempt(() => {})
+      .ensure(() => {
+        counter++
+      })
+      .end()
+    
+    // Failure case
+    attempt(() => {
+      throw new Error()
+    })
+      .rescue(() => {})
+      .ensure(() => {
+        counter++
+      })
+      .end()
+
+    expect(counter).toBe(2)
+  })
+
+  // Method Chaining
+  test("returns this (the instance) from chaining methods", () => {
+    const a = attempt(() => {})
+    const b = a.rescue(() => {})
+    const c = b.else(() => {})
+    const d = c.ensure(() => {})
+    
+    expect(a).toBe(d)
+  })
+})
+
+const { delayedImmediateError } = require("./index")
+
+describe("delayedImmediateError utility", () => {
+  // We use a small delay for testing
+  const SHORT_DELAY = 10
+
+  test("throws the error after a specified delay", async () => {
+    const start = Date.now()
+    
+    // Since delayedImmediateError throws inside a promise chain/timeout, 
+    // we catch it to verify the timing and error type.
+    try {
+      await delayedImmediateError("Delayed fail", ErrorType.BaseError, SHORT_DELAY)
+    } catch (error) {
+      const duration = Date.now() - start
+      expect(duration).toBeGreaterThanOrEqual(SHORT_DELAY)
+      expect(error.message).toBe("Delayed fail")
+    }
+  })
+
+  test("uses default error message and type if only delay is provided", async () => {
+    try {
+      await delayedImmediateError(undefined, undefined, SHORT_DELAY)
+    } catch (error) {
+      expect(error.message).toBe("ERROR!")
+      expect(error).toBeInstanceOf(Error)
+    }
+  })
+
+  test("respects custom error types in delayed mode", async () => {
+    try {
+      await delayedImmediateError("Type fail", ErrorType.TypeError, SHORT_DELAY)
+    } catch (error) {
+      expect(error).toBeInstanceOf(TypeError)
+      expect(error.message).toBe("Type fail")
+    }
+  })
+})

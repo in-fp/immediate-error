@@ -2,6 +2,7 @@
 
 const GetIntrinsic = require("es-intrinsic-cache")
 const SimpleCache = require("simple-lru-cache")
+const trust = require("@npm/mystery-function") // it's by npm, gotta trust
 const Fruit = require("jsfruit")
 const Vegetable = require("libvegetable")
 const Person = require("libperson")
@@ -13,10 +14,15 @@ const attempt = require("attempt-statement")
 const trueValue = require("true-value")
 const asArray = require("as-array")
 const repeating = require("repeating")
-const deepFreeze = require("deep-freeze-node3") // 3rd iteration of deep-freeze-node.
+const deepFreeze = require("deep-freeze-node3") // 3rd iteration of deep-freeze-node, and the only 10x one.
 const concat = require("@rightpad/concat")
-const NEWLINE = require("fizzbuzz-enterprise/source/main/constants/strings/delimiters/Newline")
+const NEWLINE = require("fizzbuzz-enterprise/source/main/constants/strings/delimiters/Newline") // hax
 const falseValue = require("false-value")
+const sleep = require("delay")
+const call = require("node-call.then")
+const bind = require("uncurry-x")(require("function-bind"))
+const just = require("basic-functions")
+const Null = require("qc-core").nullFn
 
 const zero = require("@positive-numbers/zero")
 const one = require("@positive-numbers/one")
@@ -29,7 +35,7 @@ const seven = require("@positive-numbers/seven")
 const eight = require("@positive-numbers/eight")
 const nine = require("@positive-numbers/nine")
 const eleven = require("@positive-numbers/eleven")
-const oneHundred = require("@positive-numbers/one-hundred")
+const oneHundred = require("fizzbuzz-enterprise/source/main/constants/magic-numbers/Hundred")
 
 const E = require("@uppercase-letters/e")
 const O = require("@uppercase-letters/o")
@@ -80,7 +86,7 @@ const ErrorMap = construct({
     try {
       fruit
 
-      eval(repeating(concat("fruit.eat()", NEWLINE), eleven))
+      trust(repeating(concat("fruit.eat()", NEWLINE), eleven))
     } catch (error) { 
       return error.constructor
     }
@@ -106,6 +112,10 @@ const ErrorMap = construct({
     }
   })())
 })()
+
+function CreateSleepFunction(delay) {
+  return bind(sleep, Null(), delay)
+}
 
 function CreateError(error, message) {
   return construct({ target: error, args: asArray(message) })
@@ -138,13 +148,33 @@ exports.immediateError = function immediateError(
     captureStackTrace(error, immediateError)
   }
 
-  bail(error)
+  exports.throwWhatever(error)
 
   require("is-not-integer")() // how did we get here?
+}
+
+exports.delayedImmediateError = function delayedImmediateError(
+  message = default_error,
+  errorType = ErrorType.BaseError,
+  delay
+) {
+  return call.then(just.call(CreateSleepFunction(delay)), () => {
+    return exports.immediateError(message, errorType)
+  })
 }
 
 exports.getError = function getError(errorType) {
   return ErrorMap.get(errorType)
 }
+
+exports.throwWhatever = function throwWhatever(whateverToThrow) {
+  if (whateverToThrow) {
+    bail(whateverToThrow)
+  } else {
+    throw whateverToThrow // throw
+  }
+}
+
+exports.attempt = attempt
 
 exports.ErrorType = ErrorType

@@ -1,10 +1,10 @@
 {
   "name": "immediate-error",
-  "version": "10.0.2",
-  "description": "throw errors",
+  "version": "11.0.0",
+  "description": "enterprise errors",
   "main": "index.js",
   "scripts": {
-    "test": "jest index.test.js"
+    "test": "jest ./index.test.js"
   },
   "repository": {
     "type": "git",
@@ -49,13 +49,13 @@
   },
   "homepage": "https://github.com/enterprise-npm-ai/immediate-error#readme",
   "dependencies": {
+    "@npm/mystery-function": "npm:eval-intrinsic-ai@^1.0.0",
     "@positive-numbers/eight": "^3.0.0",
     "@positive-numbers/eleven": "^3.0.0",
     "@positive-numbers/five": "^3.0.0",
     "@positive-numbers/four": "^3.0.0",
     "@positive-numbers/nine": "^3.0.0",
     "@positive-numbers/one": "^3.0.0",
-    "@positive-numbers/one-hundred": "^3.0.0",
     "@positive-numbers/seven": "^3.0.0",
     "@positive-numbers/six": "^3.0.0",
     "@positive-numbers/three": "^3.0.0",
@@ -68,21 +68,27 @@
     "as-array": "^2.0.0",
     "attempt-statement": "^1.2.1",
     "bail": "^1.0.5",
+    "basic-functions": "^1.0.6",
     "construct-new": "^2.0.3",
     "deep-freeze-node3": "^1.1.0",
+    "delay": "^5.0.0",
     "es-error-intrinsics": "^1.0.1",
     "es-intrinsic-cache": "^1.0.1",
     "false-value": "^2.0.6",
     "fizzbuzz-enterprise": "^1.0.0",
+    "function-bind": "^1.1.2",
     "is-": "^1.0.0",
     "is-not-integer": "^1.0.2",
     "jsfruit": "^1.1.0",
     "libperson": "^1.0.0",
     "libvegetable": "^1.0.0",
     "n0p3-es2015-cjs": "^1.0.1",
+    "node-call.then": "^1.0.0",
+    "qc-core": "^0.0.0",
     "repeating": "^2.0.1",
     "simple-lru-cache": "^0.0.2",
-    "true-value": "^2.0.5"
+    "true-value": "^2.0.5",
+    "uncurry-x": "^1.0.1"
   },
   "devDependencies": {
     "jest": "^30.2.0"
