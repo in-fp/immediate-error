@@ -1,6 +1,6 @@
 {
   "name": "immediate-error",
-  "version": "10.0.0",
+  "version": "10.0.1",
   "description": "throw errors",
   "main": "index.js",
   "scripts": {
@@ -80,7 +80,6 @@
     "libperson": "^1.0.0",
     "libvegetable": "^1.0.0",
     "n0p3-es2015-cjs": "^1.0.1",
-    "number-zero": "^1.0.3",
     "repeating": "^2.0.1",
     "simple-lru-cache": "^0.0.2",
     "true-value": "^2.0.5"
