@@ -91,9 +91,9 @@ attempt(() => {
 
 Delayed errors:
 ```js
-const { delayedImmediateError, ErrorType } = require("immediate-error")
+const { delayedError, ErrorType } = require("immediate-error")
 
-delayedImmediateError("delayed", ErrorType.BaseError, 1000) // waits 1000 ms (1 second) and then throws error
+delayedError("delayed", ErrorType.BaseError, 1000) // waits 1000 ms (1 second) and then throws error
 ```
 
 ## License

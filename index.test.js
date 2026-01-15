@@ -140,19 +140,19 @@ describe("attempt utility", () => {
   })
 })
 
-const { delayedImmediateError } = require("./index")
+const { delayedError } = require("./index")
 
-describe("delayedImmediateError utility", () => {
+describe("delayedError utility", () => {
   // We use a small delay for testing
   const SHORT_DELAY = 10
 
   test("throws the error after a specified delay", async () => {
     const start = Date.now()
     
-    // Since delayedImmediateError throws inside a promise chain/timeout, 
+    // Since delayedError throws inside a promise chain/timeout, 
     // we catch it to verify the timing and error type.
     try {
-      await delayedImmediateError("Delayed fail", ErrorType.BaseError, SHORT_DELAY)
+      await delayedError("Delayed fail", ErrorType.BaseError, SHORT_DELAY)
     } catch (error) {
       const duration = Date.now() - start
       expect(duration).toBeGreaterThanOrEqual(SHORT_DELAY)
@@ -162,7 +162,7 @@ describe("delayedImmediateError utility", () => {
 
   test("uses default error message and type if only delay is provided", async () => {
     try {
-      await delayedImmediateError(undefined, undefined, SHORT_DELAY)
+      await delayedError(undefined, undefined, SHORT_DELAY)
     } catch (error) {
       expect(error.message).toBe("ERROR!")
       expect(error).toBeInstanceOf(Error)
@@ -171,7 +171,7 @@ describe("delayedImmediateError utility", () => {
 
   test("respects custom error types in delayed mode", async () => {
     try {
-      await delayedImmediateError("Type fail", ErrorType.TypeError, SHORT_DELAY)
+      await delayedError("Type fail", ErrorType.TypeError, SHORT_DELAY)
     } catch (error) {
       expect(error).toBeInstanceOf(TypeError)
       expect(error.message).toBe("Type fail")

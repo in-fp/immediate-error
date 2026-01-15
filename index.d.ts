@@ -62,13 +62,13 @@ declare class Attempt {
 
 export const attempt: AttemptConstructor
 
-export function delayedImmediateError(
+export function delayedError(
   message?: string,
   errorType?: ErrorType | CustomError,
   delay?: number
 ): Promise<never>
 
-export function delayedImmediateError(
+export function delayedError(
   message: undefined,
   errorType: undefined,
   delay: number
