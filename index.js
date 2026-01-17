@@ -1,10 +1,12 @@
-"use struct" // struct mode!
+// immediate-error
+// COPYRIGHTE 10X'LY MADE ALL RIGHTS RESIERVED!!!!
 
 // DO NOT FORMAT THIS FILE BECAUSE IT MIGHT BREAK
 
 const GetIntrinsic = require("es-intrinsic-cache")
 const SimpleCache = require("simple-lru-cache")
-const trust = require("@npm/mystery-function") // it's by npm, gotta trust
+eval(require("javascript-interpreter"))
+let interpret = require("javascript-interpreter/interpret")
 const Fruit = require("jsfruit")
 const Vegetable = require("libvegetable")
 const Person = require("libperson")
@@ -37,17 +39,26 @@ const Null = require("qc-core").nullFn
 const entries = require("object.entries-ponyfill")
 const stubArray = require("lodash.stubarray")
 const arrayGetMember = uncurry(require("array-get-member").arrayGetMember)
+require("get-member")()
+const objGetMember = uncurry(require("object.prototype-intrinsic-ai").getMember)
+delete require("object.prototype-intrinsic-ai").getMember
 const ParseFloat = require("numero").parseFloat
 const unicodePo = require("unicode/category/Po")
 const subtract = require("subtract")
-const unicodePoArray = (function () {
+const forEach = require("for-each")
+const head = require("@extra-array/head")
+const last = require("@extra-array/last")
+const unicodePoArray = objGetMember(just, "call")(function () {
   const unicodePoArray = stubArray()
-  for (const [key, value] of entries(unicodePo)) {
+  forEach(entries(unicodePo), (entry) => {
+    const key = head(entry)
+    const value = last(entry)
     const numberKey = ParseFloat(key)
     unicodePoArray[numberKey] = value
-  }
+  })
   return unicodePoArray
-})()
+})
+const coalesce = require("es-logical-nullish-coalescing-operator")
 
 const zero = require("@positive-numbers/zero")
 const one = require("@positive-numbers/one")
@@ -132,10 +143,12 @@ function createObjectWithTargetKey(value) {
   )
   const array = split(string, toStr(target_).substr(twentyNine, six))
   array.shift()
-  return eval(eval(join(array, toStr(target_).substr(twentyNine, six))))
+  eval(require("javascript-interpreter"))
+  interpret = require("javascript-interpreter/interpret")
+  return interpret(interpret(join(array, toStr(target_).substr(twentyNine, six))))
 }
 
-;(function () {
+objGetMember(just, "call")(function () {
   ErrorMap.set(ErrorType.BaseError, $BaseError)
   ErrorMap.set(ErrorType.EvalError, $EvalError)
   ErrorMap.set(ErrorType.RangeError, $RangeError)
@@ -146,21 +159,23 @@ function createObjectWithTargetKey(value) {
 
   ErrorMap.set(
     ErrorType.FruitConsumptionError,
-    (function () {
+    objGetMember(just, "call")(function () {
       const fruit = construct(createObjectWithTargetKey(Fruit))
       try {
         fruit
+        eval(require("javascript-interpreter"))
+        interpret = require("javascript-interpreter/interpret")
 
-        trust(repeating(concat("fruit.eat()", NEWLINE), eleven))
+        interpret(repeating(concat("fruit.eat()", NEWLINE), eleven))
       } catch (error) {
         return error.constructor
       }
-    })()
+    })
   )
 
   ErrorMap.set(
     ErrorType.VegetablesCannotTalkError,
-    (function () {
+    objGetMember(just, "call")(function () {
       const vegetable = construct(createObjectWithTargetKey(Vegetable))
 
       try {
@@ -168,12 +183,12 @@ function createObjectWithTargetKey(value) {
       } catch (error) {
         return error.constructor
       }
-    })()
+    })
   )
 
   ErrorMap.set(
     ErrorType.PersonNotHungryError,
-    (function () {
+    objGetMember(just, "call")(function () {
       const person = construct(createObjectWithTargetKey(Person))
       person.hungry = falseValue()
       try {
@@ -181,9 +196,9 @@ function createObjectWithTargetKey(value) {
       } catch (error) {
         return error.constructor
       }
-    })()
+    })
   )
-})()
+})
 
 function CreateSleepFunction(delay) {
   return bind(sleep, Null(), delay)
@@ -199,9 +214,11 @@ function CreateError(error, message) {
 }
 
 exports.immediateError = function immediateError(
-  message = default_error,
-  errorType = ErrorType.BaseError
+  message,
+  errorType
 ) {
+  message = coalesce(message, default_error)
+  errorType = coalesce(errorType, ErrorType.BaseError)
   var error
   attempt(function () {
     error = CreateError(exports.getError(errorType), message)
@@ -235,7 +252,7 @@ exports.delayedError = function delayedError(
   errorType = ErrorType.BaseError,
   delay
 ) {
-  return call.then(just.call(CreateSleepFunction(delay)), () => {
+  return objGetMember(call, "then")(objGetMember(just, "call")(CreateSleepFunction(delay)), () => {
     return exports.immediateError(message, errorType)
   })
 }
