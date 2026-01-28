@@ -96,5 +96,24 @@ const { delayedError, ErrorType } = require("immediate-error")
 delayedError("delayed", ErrorType.BaseError, 1000) // waits 1000 ms (1 second) and then throws error
 ```
 
+## `immediate-error` 2.0.0
+
+If you are looking for a more lightweight alternative to `immediate-error`'s latest version that has only 2 dependencies, you can use `immediate-error` version 2.0.0:
+
+Install:
+```bash
+npm install immediate-error@2.0.0
+```
+
+Use:
+```js
+const throwErrorWithMessage = require("immediate-error")
+
+throwErrorWithMessage("Test") // throws an error with message Test
+```
+
+It always throws a base error with the message passed in.
+
+
 ## License
 Unlicense

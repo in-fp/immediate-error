@@ -1,4 +1,4 @@
-const { immediateError, ErrorType } = require("./index")
+const { immediateError, ErrorType, throwWhatever, getError } = require("./index")
 
 describe("immediateError utility", () => {
 
@@ -161,5 +161,69 @@ describe("delayedError utility", () => {
       expect(error).toBeInstanceOf(TypeError)
       expect(error.message).toBe("Type fail")
     }
+  })
+})
+
+describe("throwWhatever utility", () => {
+  test("throws a standard error object when passed", () => {
+    const err = new Error("standard fail")
+    expect(() => throwWhatever(err)).toThrow("standard fail")
+  })
+
+  test("throws primitive false when passed false", () => {
+    try {
+      throwWhatever(false)
+    } catch (e) {
+      expect(e).toBe(false)
+    }
+  })
+
+  test("throws primitive zero when passed 0", () => {
+    try {
+      throwWhatever(0)
+    } catch (e) {
+      expect(e).toBe(0)
+    }
+  })
+
+  test("throws a string directly when passed a string", () => {
+    expect(() => throwWhatever("Direct String")).toThrow("Direct String")
+  })
+
+  test("integrates with getError for custom domain errors", () => {
+    const FruitError = getError(ErrorType.FruitConsumptionError)
+    const err = new FruitError("Too many apples")
+    expect(() => throwWhatever(err)).toThrow(FruitError)
+  })
+})
+
+describe("getError utility", () => {
+  test("returns the intrinsic Error constructor for BaseError", () => {
+    const result = getError(ErrorType.BaseError)
+    expect(result).toBe(Error)
+  })
+
+  test("returns the intrinsic TypeError constructor for TypeError", () => {
+    const result = getError(ErrorType.TypeError)
+    expect(result).toBe(TypeError)
+  })
+
+  test("successfully extracts FruitConsumptionError from jsfruit logic", () => {
+    const FruitError = getError(ErrorType.FruitConsumptionError)
+    expect(typeof FruitError).toBe("function")
+    const instance = new FruitError("test")
+    expect(instance).toBeInstanceOf(Error)
+  })
+
+  test("successfully extracts PersonNotHungryError from libperson logic", () => {
+    const HungerError = getError(ErrorType.PersonNotHungryError)
+    expect(typeof HungerError).toBe("function")
+    expect(new HungerError()).toBeDefined()
+  })
+
+  test("returns the same constructor when passed a constructor (identity)", () => {
+    class MyError extends Error {}
+    const result = getError(MyError)
+    expect(result).toBe(MyError)
   })
 })
