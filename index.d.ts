@@ -9,6 +9,7 @@ export enum ErrorType {
   FruitConsumptionError = 7,
   VegetablesCannotTalkError = 8,
   PersonNotHungryError = 9,
+  PortionsError = 10
 }
 
 export type CustomError = {
@@ -31,6 +32,7 @@ export function getError(
   errorType: ErrorType.VegetablesCannotTalkError
 ): CustomError
 export function getError(errorType: ErrorType.PersonNotHungryError): CustomError
+export function getError(errorType: ErrorType.PortionsError): CustomError
 export function getError(errorType: ErrorType | CustomError): CustomError
 
 export function immediateError(

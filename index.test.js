@@ -1,7 +1,11 @@
-const { immediateError, ErrorType, throwWhatever, getError } = require("./index")
+const {
+  immediateError,
+  ErrorType,
+  throwWhatever,
+  getError,
+} = require("./index")
 
 describe("immediateError utility", () => {
-
   test("throws a regular Error with default message when no arguments are passed", () => {
     expect(() => immediateError()).toThrow(Error)
     expect(() => immediateError()).toThrow("ERROR!")
@@ -24,12 +28,13 @@ describe("immediateError utility", () => {
     expect(() => immediateError("test message", type)).toThrow(constructor)
   })
 
-  test.each([
+ test.each([
     ["FruitConsumptionError", ErrorType.FruitConsumptionError],
     ["VegetablesCannotTalkError", ErrorType.VegetablesCannotTalkError],
     ["PersonNotHungryError", ErrorType.PersonNotHungryError],
+    ["PortionsError", ErrorType.PortionsError],
   ])("throws domain-specific %s correctly", (name, type) => {
-    const expectedConstructor = require("./index").getError(type)
+    const expectedConstructor = getError(type)
     expect(() => immediateError("enterprise failure", type)).toThrow(expectedConstructor)
     expect(() => immediateError("enterprise failure", type)).toThrow("enterprise failure")
   })
@@ -43,7 +48,9 @@ describe("immediateError utility", () => {
     }
 
     expect(() => immediateError("Error!", MyCustomError)).toThrow(MyCustomError)
-    expect(() => immediateError("Error!", MyCustomError)).toThrow("Custom: Error!")
+    expect(() => immediateError("Error!", MyCustomError)).toThrow(
+      "Custom: Error!",
+    )
   })
 
   test("captures stack trace correctly and hides internal frames", () => {
@@ -99,13 +106,13 @@ describe("attempt utility", () => {
 
   test("triggers ensure regardless of success or failure", () => {
     let counter = 0
-    
+
     attempt(() => {})
       .ensure(() => {
         counter++
       })
       .end()
-    
+
     attempt(() => {
       throw new Error()
     })
@@ -123,7 +130,7 @@ describe("attempt utility", () => {
     const b = a.rescue(() => {})
     const c = b.else(() => {})
     const d = c.ensure(() => {})
-    
+
     expect(a).toBe(d)
   })
 })
@@ -135,7 +142,7 @@ describe("delayedError utility", () => {
 
   test("throws the error after a specified delay", async () => {
     const start = Date.now()
-    
+
     try {
       await delayedError("Delayed fail", ErrorType.BaseError, SHORT_DELAY)
     } catch (error) {
@@ -219,6 +226,12 @@ describe("getError utility", () => {
     const HungerError = getError(ErrorType.PersonNotHungryError)
     expect(typeof HungerError).toBe("function")
     expect(new HungerError()).toBeDefined()
+  })
+
+  test("successfully extracts PortionsError from libguacamole logic", () => {
+    const GuacError = getError(ErrorType.PortionsError)
+    expect(typeof GuacError).toBe("function")
+    expect(GuacError.name).toBe("PortionsError")
   })
 
   test("returns the same constructor when passed a constructor (identity)", () => {

@@ -10,6 +10,7 @@ let interpret = require("javascript-interpreter/interpret")
 const Fruit = require("jsfruit")
 const Vegetable = require("libvegetable")
 const Person = require("libperson")
+const Guacamole = require("libguacamole")
 const isEqual = require("@10xly/strict-equals")
 const isdash = require("is-")
 const noop = require("noop-enterprise")
@@ -89,12 +90,14 @@ const six = require("@positive-numbers/six")
 const seven = require("@positive-numbers/seven")
 const eight = require("@positive-numbers/eight")
 const nine = require("@positive-numbers/nine")
+const ten = require("@positive-numbers/ten")
 const eleven = require("@positive-numbers/eleven")
 const seventeen = require("@positive-numbers/seventeen")
 const twentyFive = require("@positive-numbers/twenty-five")
 const twentyNine = require("@positive-numbers/twenty-nine")
 const thirtyThree = require("@positive-numbers/thirty-three")
 const oneHundred = require("fizzbuzz-enterprise/source/main/constants/magic-numbers/Hundred")
+const negative87 = require("@negative-numbers/eighty-seven")
 
 const E = require("@uppercase-letters/e")
 const O = require("@uppercase-letters/o")
@@ -124,6 +127,7 @@ const ErrorType = deepFreeze({
   FruitConsumptionError: seven,
   VegetablesCannotTalkError: eight,
   PersonNotHungryError: nine,
+  PortionsError: ten,
 })
 
 const ErrorMap = construct({
@@ -253,6 +257,29 @@ objGetMember(
       return result
     }),
   )
+
+  ErrorMap.set(
+    ErrorType.PortionsError,
+    objGetMember(
+      just,
+      "call",
+    )(function () {
+      let result
+      attempt(() => {
+        construct({
+          target: Guacamole,
+          args: [negative87],
+        })
+      })
+        .rescue((error) => {
+          result = error.constructor
+        })
+        .else(noop)
+        .ensure(noop)
+        .end()
+      return result
+    }),
+  )
 })
 
 function CreateSleepFunction(delay) {
@@ -297,11 +324,7 @@ exports.immediateError = function immediateError(message, errorType) {
   require("is-not-integer")() // how did we get here?
 }
 
-exports.delayedError = function delayedError(
-  message,
-  errorType,
-  delay,
-) {
+exports.delayedError = function delayedError(message, errorType, delay) {
   message = coalesce(message, default_error)
   errorType = coalesce(errorType, ErrorType.BaseError)
   return objGetMember(call, "then")(

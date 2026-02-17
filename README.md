@@ -38,6 +38,8 @@ immediateError("vegetables cannot talk error", ErrorType.VegetablesCannotTalkErr
 
 immediateError("person not hungry error", ErrorType.PersonNotHungryError) // throws a PersonNotHungryError
 
+immediateError("portions error", ErrorType.PortionsError) // throws a PortionsError
+
 class MyCustomError extends Error {
   constructor (message) {
     super("Custom: " + message)

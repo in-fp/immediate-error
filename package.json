@@ -1,6 +1,6 @@
 {
   "name": "immediate-error",
-  "version": "12.0.0",
+  "version": "12.1.0",
   "description": "enterprise errors",
   "main": "index.js",
   "scripts": {
@@ -60,6 +60,7 @@
     "@is-(unknown)/is-null": "1.3.0",
     "@is-(unknown)/is-string": "^1.0.0",
     "@is-(unknown)/is-undefined": "1.3.0",
+    "@negative-numbers/eighty-seven": "^1.0.0",
     "@negative-numbers/zero": "1.0.0",
     "@positive-numbers/eight": "^3.0.0",
     "@positive-numbers/eleven": "^3.0.0",
@@ -70,6 +71,7 @@
     "@positive-numbers/seven": "^3.0.0",
     "@positive-numbers/seventeen": "^3.0.0",
     "@positive-numbers/six": "^3.0.0",
+    "@positive-numbers/ten": "^3.0.0",
     "@positive-numbers/thirty-three": "^3.0.0",
     "@positive-numbers/three": "^3.0.0",
     "@positive-numbers/twenty-five": "^4.0.0",
@@ -104,6 +106,7 @@
     "is-not-integer": "^1.0.2",
     "javascript-interpreter": "^1.0.0",
     "jsfruit": "^1.1.0",
+    "libguacamole": "^1.0.0",
     "libperson": "^1.0.0",
     "libvegetable": "^1.0.0",
     "lodash.stubarray": "^4.13.0",
