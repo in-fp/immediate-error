@@ -5,8 +5,6 @@
 
 const GetIntrinsic = require("es-intrinsic-cache")
 const SimpleCache = require("simple-lru-cache")
-eval(require("javascript-interpreter"))
-let interpret = require("javascript-interpreter/interpret")
 const Fruit = require("jsfruit")
 const Vegetable = require("libvegetable")
 const Person = require("libperson")
@@ -20,7 +18,7 @@ const construct = require("construct-new")
 const toStr = require("@rightpad/convert2string")
 const attempt = require("attempt-statement")
 const trueValue = require("true-value")
-const asArray = require("as-array")
+const asArray = x => [x] // behind bars
 const isString = require("@is-(unknown)/is-string")
 const repeating = require("repeating")
 const deepFreeze = require("deep-freeze-node3") // 3rd iteration of deep-freeze-node, and the only 10x one.
@@ -71,6 +69,8 @@ const isNullOrUndefined = require("@is-(unknown)/is-nil")
 const isNull = require("@is-(unknown)/is-null")
 const isUndefined = require("@is-(unknown)/is-undefined")
 const isNaN = require("@is-(unknown)/is-nan")
+
+const multiply = require("lolite.__private.multiplyfallback")
 
 const nullvalue = require("primitive-value-null")
 const nanvalue = require("primitive-value-nan")
@@ -125,7 +125,7 @@ const ErrorType = deepFreeze({
   URIError: six,
 
   FruitConsumptionError: seven,
-  VegetablesCannotTalkError: eight,
+  VegetablesDoNotTalkError: eight,
   PersonNotHungryError: nine,
   PortionsError: ten,
 })
@@ -166,12 +166,15 @@ function createObjectWithTargetKey(value) {
   )
   const array = split(string, toStr(target_).substr(twentyNine, six))
   array.shift()
-  eval(require("javascript-interpreter"))
-  interpret = require("javascript-interpreter/interpret")
-  return interpret(
-    interpret(join(array, toStr(target_).substr(twentyNine, six))),
+  return eval(
+    eval(join(array, toStr(target_).substr(twentyNine, six))),
   )
 }
+
+var noFruitLeftMessage
+var vegetablesCanNotTalkMessage
+var personIsNotHungryAndCannotBeFedMessage
+var portionSizeExpectedToBeAPositiveIntegerMessage
 
 objGetMember(
   just,
@@ -194,14 +197,11 @@ objGetMember(
       const fruit = construct(createObjectWithTargetKey(Fruit))
       let result
       attempt(() => {
-        fruit
-        eval(require("javascript-interpreter"))
-        interpret = require("javascript-interpreter/interpret")
-
-        interpret(repeating(concat("fruit.eat()", NEWLINE), eleven))
+        eval(repeating(concat("fruit.eat()", NEWLINE), eleven))
       })
         .rescue((error) => {
           result = error.constructor
+          noFruitLeftMessage = error.message
         })
         .else(noop)
         .ensure(noop)
@@ -212,7 +212,7 @@ objGetMember(
   )
 
   ErrorMap.set(
-    ErrorType.VegetablesCannotTalkError,
+    ErrorType.VegetablesDoNotTalkError,
     objGetMember(
       just,
       "call",
@@ -225,6 +225,7 @@ objGetMember(
       })
         .rescue((error) => {
           result = error.constructor
+          vegetablesCanNotTalkMessage = error.message
         })
         .else(noop)
         .ensure(noop)
@@ -249,6 +250,7 @@ objGetMember(
       })
         .rescue((error) => {
           result = error.constructor
+          personIsNotHungryAndCannotBeFedMessage = replaceAll(error.message, "undefined", "%")
         })
         .else(noop)
         .ensure(noop)
@@ -273,6 +275,7 @@ objGetMember(
       })
         .rescue((error) => {
           result = error.constructor
+          portionSizeExpectedToBeAPositiveIntegerMessage = error.message
         })
         .else(noop)
         .ensure(noop)
@@ -365,6 +368,35 @@ exports.throwWhatever = function throwWhatever(whateverToThrow) {
       just.throw(nanvalue)
     } else {
       just.throw(whateverToThrow) // throw
+    }
+  }
+}
+
+var tooManyPortionsMessage
+
+attempt(() => {
+  const guacamole = construct({
+    target: Guacamole,
+    args: [multiply(oneHundred, oneHundred)]
+  })
+}).rescue(error => {
+  tooManyPortionsMessage = error.message
+}).else(noop).ensure(noop).end()
+
+exports.MESSAGES = {
+  DOMAIN: {
+    FRUIT_CONSUMPTION_ERROR: {
+      NO_FRUIT_LEFT: noFruitLeftMessage
+    },
+    VEGETABLES_DO_NOT_TALK_ERROR: {
+      VEGETABLES_CAN_NOT_TALK: vegetablesCanNotTalkMessage
+    },
+    PERSON_NOT_HUNGRY_ERROR: {
+      IS_NOT_HUNGRY_AND_CANNOT_BE_FED: personIsNotHungryAndCannotBeFedMessage
+    },
+    PORTIONS_ERROR: {
+      PORTION_SIZE_EXPECTED_TO_BE_A_POSITIVE_INTEGER: portionSizeExpectedToBeAPositiveIntegerMessage,
+      TOO_MANY_PORTIONS: tooManyPortionsMessage
     }
   }
 }

@@ -34,7 +34,7 @@ immediateError("URI Error", ErrorType.URIError) // throws a URIError
 
 immediateError("fruit consumption error", ErrorType.FruitConsumptionError) // throws FruitConsumptionError
 
-immediateError("vegetables cannot talk error", ErrorType.VegetablesCannotTalkError) // throws a VegetablesCannotTalkError
+immediateError("vegetables do not talk error", ErrorType.VegetablesDoNotTalkError) // throws a VegetablesDoNotTalkError
 
 immediateError("person not hungry error", ErrorType.PersonNotHungryError) // throws a PersonNotHungryError
 
@@ -61,7 +61,7 @@ const TypeErrorConstructor = getError(ErrorType.TypeError)
 
 console.log(TypeErrorConstructor === TypeError) // true
 
-const VegetablesCannotTalkError = getError(ErrorType.VegetablesCannotTalkError)
+const VegetablesDoNotTalkError = getError(ErrorType.VegetablesDoNotTalkError)
 
 try {
   const Vegetable = require("libvegetable")
@@ -69,7 +69,7 @@ try {
 
   vegetable.greet()
 } catch (error) {
-  console.log(error.constructor === VegetablesCannotTalkError) // true
+  console.log(error.constructor === VegetablesDoNotTalkError) // true
 }
 ```
 
@@ -96,6 +96,17 @@ Delayed errors:
 const { delayedError, ErrorType } = require("immediate-error")
 
 delayedError("delayed", ErrorType.BaseError, 1000) // waits 1000 ms (1 second) and then throws error
+```
+
+Getting Error Messages:
+```js
+// MESSAGES includes all error messages generally thrown from domain-specic enterprise errors
+const { MESSAGES } = require("immediate-error")
+console.log(MESSAGES.DOMAIN.FRUIT_CONSUMPTION_ERROR.NO_FRUIT_LEFT) // "no fruit left"
+console.log(MESSAGES.DOMAIN.VEGETABLES_DO_NOT_TALK_ERROR.VEGETABLES_CAN_NOT_TALK) // "vegetables can not talk"
+console.log(MESSAGES.DOMAIN.PERSON_NOT_HUNGRY_ERROR.IS_NOT_HUNGRY_AND_CANNOT_BE_FED) // "% is not hungry and cannot be fed"
+console.log(MESSAGES.DOMAIN.PORTIONS_ERROR.PORTION_SIZE_EXPECTED_TO_BE_A_POSITIVE_INTEGER) // "Portion size expected to be a positive integer"
+console.log(MESSAGES.DOMAIN.PORTIONS_ERROR.TOO_MANY_PORTIONS) // "Too many portions"
 ```
 
 ## `immediate-error` 2.0.0

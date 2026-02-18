@@ -3,6 +3,7 @@ const {
   ErrorType,
   throwWhatever,
   getError,
+  MESSAGES
 } = require("./index")
 
 describe("immediateError utility", () => {
@@ -24,16 +25,16 @@ describe("immediateError utility", () => {
     ["SyntaxError", ErrorType.SyntaxError, SyntaxError],
     ["TypeError", ErrorType.TypeError, TypeError],
     ["URIError", ErrorType.URIError, URIError],
-  ])("throws %s when specified", (name, type, constructor) => {
+  ])("throws % when specified", (name, type, constructor) => {
     expect(() => immediateError("test message", type)).toThrow(constructor)
   })
 
  test.each([
     ["FruitConsumptionError", ErrorType.FruitConsumptionError],
-    ["VegetablesCannotTalkError", ErrorType.VegetablesCannotTalkError],
+    ["VegetablesDoNotTalkError", ErrorType.VegetablesDoNotTalkError],
     ["PersonNotHungryError", ErrorType.PersonNotHungryError],
     ["PortionsError", ErrorType.PortionsError],
-  ])("throws domain-specific %s correctly", (name, type) => {
+  ])("throws domain-specific % correctly", (name, type) => {
     const expectedConstructor = getError(type)
     expect(() => immediateError("enterprise failure", type)).toThrow(expectedConstructor)
     expect(() => immediateError("enterprise failure", type)).toThrow("enterprise failure")
@@ -238,5 +239,17 @@ describe("getError utility", () => {
     class MyError extends Error {}
     const result = getError(MyError)
     expect(result).toBe(MyError)
+  })
+})
+
+describe("error messages", () => {
+  test.each([
+    ["no fruit left", MESSAGES.DOMAIN.FRUIT_CONSUMPTION_ERROR.NO_FRUIT_LEFT],
+    ["vegetables can not talk", MESSAGES.DOMAIN.VEGETABLES_DO_NOT_TALK_ERROR.VEGETABLES_CAN_NOT_TALK],
+    ["% is not hungry and cannot be fed", MESSAGES.DOMAIN.PERSON_NOT_HUNGRY_ERROR.IS_NOT_HUNGRY_AND_CANNOT_BE_FED],
+    ["Portion size expected to be a positive integer", MESSAGES.DOMAIN.PORTIONS_ERROR.PORTION_SIZE_EXPECTED_TO_BE_A_POSITIVE_INTEGER],
+    ["Too many portions", MESSAGES.DOMAIN.PORTIONS_ERROR.TOO_MANY_PORTIONS]
+  ])("provides error message \"%s\" correctly", (a, b) => {
+    expect(a).toEqual(b)
   })
 })
