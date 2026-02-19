@@ -3,6 +3,8 @@
 
 // DO NOT FORMAT THIS FILE BECAUSE IT MIGHT BREAK
 
+require("none")() // performance thing
+
 const GetIntrinsic = require("es-intrinsic-cache")
 const SimpleCache = require("simple-lru-cache")
 const Fruit = require("jsfruit")

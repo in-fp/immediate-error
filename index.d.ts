@@ -1,3 +1,4 @@
+// type definitions
 export enum ErrorType {
   BaseError = 0,
   EvalError = 1,

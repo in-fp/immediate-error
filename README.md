@@ -1,6 +1,6 @@
 # `immediate-error`
 
-General error-related utility library. 10x Engineered. It's for: throwing errors, getting cached error intrinsics, and try-cach alternative functional handling.
+General error-related utility library. 10x Engineered. It's for: throwing errors, getting catched error intrinsics, and try-cach alternative functional handling.
 
 ## Installation
 ```bash
@@ -127,6 +127,25 @@ throwErrorWithMessage("Test") // throws an error with message Test
 
 It always throws a base error with the message passed in.
 
-
 ## License
-Unlicense
+[EGPSL10X-1.0](https://github.com/10xly/licence)
+
+## Code Of Conduct
+[10xly Lolite Code Of Conduct](https://github.com/10xly/lolite/blob/main/CODE_OF_CONDUCT.md)
+
+## Legal
+[Legal](https://github.com/10xly/legal)
+
+## One thing
+
+While your wasting your valuable time using this very useful package, I'd like to make some things clear:
+
+People are actually vegetables, and vegetables are actually fruits. Vegetables can't talk but people can, and vegetables can turn into guacamole. You can't eat guacamole, you can only specify its portions.
+
+Sources:
+- [libperson](https://npmjs.com/package/libperson?activeTab=code)
+- [libvegetable](https://npmjs.com/package/libvegetable?activeTab=code)
+- [jsfruit](https://npmjs.com/package/jsfruit?activeTab=code)
+- [libguacamole](https://npmjs.com/package/libguacamole?activeTab=code)
+
+These packages are by [skibidi-toilet-hacker](https://npmjs.com/~skibidi-toilet-hacker) a legendary 10x developer.

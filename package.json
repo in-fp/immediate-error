@@ -1,6 +1,6 @@
 {
   "name": "immediate-error",
-  "version": "12.2.0",
+  "version": "12.2.1",
   "description": "enterprise errors",
   "main": "index.js",
   "scripts": {
@@ -43,7 +43,7 @@
     "stevelib"
   ],
   "author": "10x'ly Made",
-  "license": "Unlicense",
+  "license": "EGPSL10X-1.0",
   "bugs": {
     "url": "https://github.com/enterprise-npm-ai/immediate-error/issues"
   },
@@ -84,13 +84,13 @@
     "@uppercase-letters/e": "^3.0.0",
     "@uppercase-letters/o": "^3.0.0",
     "@uppercase-letters/r": "^3.0.0",
-    "array-get-member": "^1.0.3",
+    "array-get-member": "^1.0.4",
     "array.prototype.join": "^1.0.4",
     "attempt-statement": "^1.2.1",
     "bail": "^1.0.5",
     "basic-functions": "^1.0.6",
     "bigint-intrinsic-ai": "1.0.0",
-    "construct-new": "^2.0.3",
+    "construct-new": "^2.0.8",
     "deep-freeze-node3": "^1.1.0",
     "empty-string": "1.1.1",
     "es-error-intrinsics": "^1.0.1",
@@ -110,6 +110,7 @@
     "lodash.stubarray": "^4.13.0",
     "lolite.__private.multiplyfallback": "^1.1.17",
     "node-call.then": "^1.0.0",
+    "none": "^1.0.0",
     "noop-enterprise": "^2.0.1",
     "noop10": "1.0.3",
     "numero": "^0.1.1",
