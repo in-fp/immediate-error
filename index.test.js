@@ -36,6 +36,7 @@ describe("immediateError utility", () => {
     ["VegetablesDoNotTalkError", ErrorType.VegetablesDoNotTalkError],
     ["PersonNotHungryError", ErrorType.PersonNotHungryError],
     ["PortionsError", ErrorType.PortionsError],
+    ["FalseJSValidationFailedToPassError", ErrorType.FalseJSValidationFailedToPassError]
   ])("throws domain-specific % correctly", (name, type) => {
     const expectedConstructor = getError(type)
     expect(() => immediateError("enterprise failure", type)).toThrow(expectedConstructor)
@@ -237,6 +238,12 @@ describe("getError utility", () => {
     expect(GuacError.name).toBe("PortionsError")
   })
 
+  test("successfully extracts FalseJSValidationFailedToPassError", () => {
+    const FalseJSValidationFailedToPassError = getError(ErrorType.FalseJSValidationFailedToPassError)
+    expect(typeof FalseJSValidationFailedToPassError).toBe("function")
+    expect(FalseJSValidationFailedToPassError.name).toBe("FalseJSValidationFailedToPassError")
+  })
+
   test("returns the same constructor when passed a constructor (identity)", () => {
     class MyError extends Error {}
     const result = getError(MyError)
@@ -250,7 +257,8 @@ describe("error messages", () => {
     ["vegetables can not talk", MESSAGES.DOMAIN.VEGETABLES_DO_NOT_TALK_ERROR.VEGETABLES_CAN_NOT_TALK],
     ["% is not hungry and cannot be fed", MESSAGES.DOMAIN.PERSON_NOT_HUNGRY_ERROR.IS_NOT_HUNGRY_AND_CANNOT_BE_FED],
     ["Portion size expected to be a positive integer", MESSAGES.DOMAIN.PORTIONS_ERROR.PORTION_SIZE_EXPECTED_TO_BE_A_POSITIVE_INTEGER],
-    ["Too many portions", MESSAGES.DOMAIN.PORTIONS_ERROR.TOO_MANY_PORTIONS]
+    ["Too many portions", MESSAGES.DOMAIN.PORTIONS_ERROR.TOO_MANY_PORTIONS],
+    ["Validation failed to pass", MESSAGES.DOMAIN.FALSEJS_VALIDATION_FAILED_TO_PASS_ERROR.VALIDATION_FAILED_TO_PASS]
   ])("provides error message \"%s\" correctly", (a, b) => {
     expect(a).toEqual(b)
   })

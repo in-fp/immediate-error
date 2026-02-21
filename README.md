@@ -40,6 +40,8 @@ immediateError("person not hungry error", ErrorType.PersonNotHungryError) // thr
 
 immediateError("portions error", ErrorType.PortionsError) // throws a PortionsError
 
+immediateError("falsejs validation failed to pass error", ErrorType.FalseJSValidationFailedToPassError) // throws a FalseJSValidationFailedToPassError
+
 class MyCustomError extends Error {
   constructor (message) {
     super("Custom: " + message)
@@ -107,6 +109,7 @@ console.log(MESSAGES.DOMAIN.VEGETABLES_DO_NOT_TALK_ERROR.VEGETABLES_CAN_NOT_TALK
 console.log(MESSAGES.DOMAIN.PERSON_NOT_HUNGRY_ERROR.IS_NOT_HUNGRY_AND_CANNOT_BE_FED) // "% is not hungry and cannot be fed"
 console.log(MESSAGES.DOMAIN.PORTIONS_ERROR.PORTION_SIZE_EXPECTED_TO_BE_A_POSITIVE_INTEGER) // "Portion size expected to be a positive integer"
 console.log(MESSAGES.DOMAIN.PORTIONS_ERROR.TOO_MANY_PORTIONS) // "Too many portions"
+console.log(MESSAGES.DOMAIN.FALSEJS_VALIDATION_FAILED_TO_PASS_ERROR.VALIDATION_FAILED_TO_PASS) // "Validation failed to pass"
 ```
 
 ## `immediate-error` 2.0.0

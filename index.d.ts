@@ -11,6 +11,7 @@ export enum ErrorType {
   VegetablesDoNotTalkError = 8,
   PersonNotHungryError = 9,
   PortionsError = 10,
+  FalseJSValidationFailedToPassError = 11
 }
 export type CustomError = {
   new (message: string): Error
@@ -32,6 +33,7 @@ export function getError(
 ): CustomError
 export function getError(errorType: ErrorType.PersonNotHungryError): CustomError
 export function getError(errorType: ErrorType.PortionsError): CustomError
+export function getError(errorType: ErrorType.FalseJSValidationFailedToPassError): CustomError
 export function getError(errorType: ErrorType | CustomError): CustomError
 export function immediateError(
   message?: string,
@@ -78,6 +80,9 @@ export const MESSAGES: {
     PORTIONS_ERROR: {
       PORTION_SIZE_EXPECTED_TO_BE_A_POSITIVE_INTEGER: "Portion size expected to be a positive integer",
       TOO_MANY_PORTIONS: "Too many portions"
+    },
+    FALSEJS_VALIDATION_FAILED_TO_PASS_ERROR: {
+      VALIDATION_FAILED_TO_PASS: "Validation failed to pass"
     }
   }
 }

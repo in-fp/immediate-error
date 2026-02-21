@@ -1,6 +1,6 @@
 {
   "name": "immediate-error",
-  "version": "12.2.1",
+  "version": "12.2.2",
   "description": "enterprise errors",
   "main": "index.js",
   "scripts": {
@@ -53,6 +53,7 @@
     "@characters/right-parenthesis": "2.1.0",
     "@extra-array/head": "^2.10.19",
     "@extra-array/last": "^2.10.19",
+    "@falsejs/validation-failed-to-pass-error": "^1.0.1",
     "@is-(unknown)/is-false": "1.5.0",
     "@is-(unknown)/is-nan": "1.0.0",
     "@is-(unknown)/is-negative-zero": "1.0.0",

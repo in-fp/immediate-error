@@ -114,6 +114,8 @@ const $SyntaxError = require("es-error-intrinsics/SyntaxError")
 const $TypeError = require("es-error-intrinsics/TypeError")
 const $URIError = require("es-error-intrinsics/URIError")
 
+const FalseJSValidationFailedToPassError = require("@falsejs/validation-failed-to-pass-error")
+
 const captureStackTrace = GetIntrinsic("%Error.captureStackTrace%", trueValue())
 
 const default_error = concat(E, R, R, O, R, EXCLAMATION_POINT)
@@ -130,6 +132,7 @@ const ErrorType = deepFreeze({
   VegetablesDoNotTalkError: eight,
   PersonNotHungryError: nine,
   PortionsError: ten,
+  FalseJSValidationFailedToPassError: eleven
 })
 
 const ErrorMap = construct({
@@ -285,6 +288,8 @@ objGetMember(
       return result
     }),
   )
+
+  ErrorMap.set(ErrorType.FalseJSValidationFailedToPassError, FalseJSValidationFailedToPassError)
 })
 
 function CreateSleepFunction(delay) {
@@ -399,6 +404,9 @@ exports.MESSAGES = {
     PORTIONS_ERROR: {
       PORTION_SIZE_EXPECTED_TO_BE_A_POSITIVE_INTEGER: portionSizeExpectedToBeAPositiveIntegerMessage,
       TOO_MANY_PORTIONS: tooManyPortionsMessage
+    },
+    FALSEJS_VALIDATION_FAILED_TO_PASS_ERROR: {
+      VALIDATION_FAILED_TO_PASS: "Validation failed to pass" // use the error message directly as we don't want to install FalseJS because it is really heavy.
     }
   }
 }
