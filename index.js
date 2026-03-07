@@ -27,7 +27,7 @@ const NEWLINE = require("fizzbuzz-enterprise/source/main/constants/strings/delim
 const emptyString = require("empty-string")
 const falseValue = require("false-value"),
   sleep = require("@redux-saga/delay-p").default
-const uncurry = require("uncurry-x")
+const uncurry = require("call-bind-enterprise")
 const join = require("array.prototype.join")
 const at = require("string.prototype.at")
 const replaceAll = require("str-replaceallof-es")
@@ -79,6 +79,9 @@ const isUndefined = require("@is-(unknown)/is-undefined")
 // eslint-disable-next-line sonarjs/no-globals-shadowing
 const isNaN = require("@is-(unknown)/is-nan")
 const use = require("use-unused-vars")
+const assign = require("@frosted/object.assign")
+const global = require("@10xly/global")
+const getFnName = require("name-of-function")
 
 const { TernaryCompare } = require("important-extremely-useful-classes")
 
@@ -175,6 +178,12 @@ function target_(value) {
 
 // eslint-disable-next-line max-statements
 function createObjectWithTargetKey(value) {
+  const name = construct({
+    target: TernaryCompare,
+    // eslint-disable-next-line sort-keys
+    args: [isString(value), `"${value}"`, getFnName(value)],
+  }).compare()
+  global[name] = value
   let string = toStr(target_)
   string = arrayGetMember(
     // eslint-disable-next-line unicorn/prefer-string-slice
@@ -198,13 +207,9 @@ function createObjectWithTargetKey(value) {
     string,
     // eslint-disable-next-line unicorn/prefer-string-slice
     toStr(target_).substr(seventeen, five),
-    construct({
-      target: TernaryCompare,
-      // eslint-disable-next-line sort-keys
-      args: [isString(value), `"${value}"`, value.name]
-    }).compare()
+    name,
   )
-  // eslint-disable-next-line unicorn/prefer-string-slice
+  // eslint-disable-next-line unicorn/prefer-string-slice, one-var
   const array = split(string, toStr(target_).substr(twentyNine, six))
   array.shift()
   // eslint-disable-next-line unicorn/prefer-string-slice, no-eval, sonarjs/code-eval
@@ -213,7 +218,7 @@ function createObjectWithTargetKey(value) {
 
 // eslint-disable-next-line init-declarations
 let noFruitLeftMessage,
-// eslint-disable-next-line init-declarations
+  // eslint-disable-next-line init-declarations
   personIsNotHungryAndCannotBeFedMessage,
   // eslint-disable-next-line init-declarations
   portionSizeExpectedToBeAPositiveIntegerMessage,
@@ -223,7 +228,7 @@ let noFruitLeftMessage,
 objectGetMember(
   just,
   "call",
-// eslint-disable-next-line max-lines-per-function, max-statements
+  // eslint-disable-next-line max-lines-per-function, max-statements
 )(() => {
   ErrorMap.set(ErrorType.BaseError, $BaseError)
   ErrorMap.set(ErrorType.EvalError, $EvalError)
@@ -352,11 +357,11 @@ function CreateSleepFunction(delay) {
 }
 
 function CreateError(error, message) {
-  return construct({
-    target: error,
-    // eslint-disable-next-line sort-keys
-    args: asArray(message),
-  })
+  return construct(
+    assign(createObjectWithTargetKey(error), {
+      args: asArray(message),
+    }),
+  )
 }
 
 exports.immediateError = function immediateError(message, errorType) {
@@ -372,7 +377,7 @@ exports.immediateError = function immediateError(message, errorType) {
   })
     .rescue(() => {
       attempt(() => {
-    // eslint-disable-next-line new-cap, unicorn/throw-new-error
+        // eslint-disable-next-line new-cap, unicorn/throw-new-error
         error = CreateError(errorType, message)
       })
         .rescue(() => {
@@ -413,7 +418,7 @@ exports.getError = function getError(errorType) {
   return construct({
     target: TernaryCompare,
     // eslint-disable-next-line sort-keys
-    args: [ErrorMap.get(errorType), ErrorMap.get(errorType), errorType]
+    args: [ErrorMap.get(errorType), ErrorMap.get(errorType), errorType],
   }).compare()
 }
 

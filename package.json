@@ -1,6 +1,6 @@
 {
   "name": "immediate-error",
-  "version": "12.2.3",
+  "version": "12.2.4",
   "description": "enterprise errors",
   "main": "index.js",
   "scripts": {
@@ -49,11 +49,13 @@
   },
   "homepage": "https://github.com/enterprise-npm-ai/immediate-error#readme",
   "dependencies": {
+    "@10xly/global": "^1.1.1",
     "@10xly/strict-equals": "1.0.1",
     "@characters/right-parenthesis": "2.1.0",
     "@extra-array/head": "^2.10.19",
     "@extra-array/last": "^2.10.19",
     "@falsejs/validation-failed-to-pass-error": "^1.0.1",
+    "@frosted/object.assign": "^1.0.0",
     "@is-(unknown)/is-false": "1.5.0",
     "@is-(unknown)/is-nan": "1.0.0",
     "@is-(unknown)/is-negative-zero": "1.0.0",
@@ -91,6 +93,7 @@
     "bail": "^1.0.5",
     "basic-functions": "^1.0.6",
     "bigint-intrinsic-ai": "1.0.0",
+    "call-bind-enterprise": "^1.0.0",
     "construct-new": "^2.0.8",
     "deep-freeze-node3": "^1.1.0",
     "empty-string": "1.1.1",
@@ -111,6 +114,7 @@
     "libvegetable": "^1.0.0",
     "lodash.stubarray": "^4.13.0",
     "lolite.__private.multiplyfallback": "^1.1.17",
+    "name-of-function": "^1.0.2",
     "node-call.then": "^1.0.0",
     "none": "^1.0.0",
     "noop-enterprise": "^2.0.1",
@@ -131,7 +135,6 @@
     "string.prototype.split": "^1.0.9",
     "subtract": "^0.0.3",
     "true-value": "^3.0.0",
-    "uncurry-x": "^1.0.1",
     "unicode": "^14.0.0",
     "use-unused-vars": "^1.0.1",
     "utf8-byte-length": "^1.0.5"
