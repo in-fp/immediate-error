@@ -1,6 +1,6 @@
 {
   "name": "immediate-error",
-  "version": "12.2.4",
+  "version": "12.2.5",
   "description": "enterprise errors",
   "main": "index.js",
   "scripts": {
